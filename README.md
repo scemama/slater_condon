@@ -1,13 +1,15 @@
-Slater-Condon
-=============
+An efficient implementation of Slater-Condon rules
+==================================================
 
-| **An efficient implementation of Slater-Condon rules**
-| *Anthony Scemama, Emmanuel Giner*
+*Anthony Scemama, Emmanuel Giner*
 
-    Slater-Condon rules are at the heart of any quantum chemistry method as they allow to simplify 3N-dimensional integrals as sums of 3- or 6-dimensional integrals. In this paper, we propose an efficient implementation of those rules in order to identify very rapidly which integrals are involved in a matrix element expressed in the determinant basis set. This implementation takes advantage of the bit manipulation instructions on x86 architectures that were introduced in 2008 with the SSE4.2 instruction set. Finding which spin-orbitals are involved in the calculation of a matrix element doesn't depend on the number of electrons of the system. 
+Slater-Condon rules are at the heart of any quantum chemistry method as they allow to simplify 3N-dimensional integrals as sums of 3- or 6-dimensional integrals. In this paper, we propose an efficient implementation of those rules in order to identify very rapidly which integrals are involved in a matrix element expressed in the determinant basis set. This implementation takes advantage of the bit manipulation instructions on x86 architectures that were introduced in 2008 with the SSE4.2 instruction set. Finding which spin-orbitals are involved in the calculation of a matrix element doesn't depend on the number of electrons of the system. 
 
 http://arxiv.org/abs/1311.6244
 
+
+Benchmarks
+-----------
 
 The Intel Fortran compiler and the GNU C compiler are needed.
 

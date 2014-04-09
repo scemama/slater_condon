@@ -59,7 +59,6 @@ subroutine compute_density_matrix(det,Ndet,coef,mo_num, &
      j = exc(1,2,2) 
    end if
    c = phase*coef(k)*coef(l)
-   c = c+c
    density_matrix(j,i) = density_matrix(j,i) + c 
    density_matrix(i,j) = density_matrix(i,j) + c 
   end do

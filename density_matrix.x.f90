@@ -38,7 +38,7 @@ subroutine compute_density_matrix(det,Ndet,coef,mo_num, &
     do i=1,Nint
       buffer = det(i,ispin,k)
       do while (buffer /= 0_8)
-        j = trailz(buffer) + ishift 
+        j = trailz(buffer) + ishift + 1
         density_matrix(j,j) = density_matrix(j,j) &
                             + coef(k)*coef(k)
         buffer = iand(buffer,buffer-1_8)

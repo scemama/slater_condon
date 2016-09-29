@@ -1,0 +1,35 @@
+################################################################################
+# NOTES
+################################################################################
+
+Okay so understanding the code:
+
+This code REQUIRES the number of \alpha and \beta spin orbitals to be the same, unsurprisingly.
+
+This code stores bit strings as a 2D array of 64-bit integers:
+
+                DETERMINANT
+            |--------|--------|
+            | \alpha |  \beta |
+            |--------|--------|
+     row 0  |        |        |
+            |--------|--------|
+     row 1  |        |        |
+            |--------|--------|
+     row N  |        |        |
+            |--------|--------|
+To find N, the number of rows, you can do this:
+    N = (N_MOs/64) + 1
+Note we aren't actually limited to 64 bit ints here. On older 32 bit operating systems it would actually be better to use 32 bit ints (correct me if I'm wrong). And in the future it may be better to use 128. This could mean that the code could be generalized by using the system defined size of int? I'm sure compilers are smart enough to guess which popcount to use?
+------------------------------------------
+Nexcitations just gets the number of different bits between two determinants and returns that. The way this is done is actually really easy.
+For every int in the determinant do something called popcount. Popcount is the ``hamming weights''. It tells you how many bits an int differs by. Then we sum these for every int in the bitstring. If you think for a second, a determinant (HF det water sto3g) "11111000" and single excitation "11110100" differ by 2 places. So we need to divide by two. This is done by bit shifting:
+    In the binary system the places are:
+        64 32 16  8  4  2  1
+    the number 2 is represented by:
+    10
+    Moving the 1 to the right gives the number 1. Which is 2/2.
+    32 is represented by:
+    10000. Moving the 1 over gives 16.
+    We know the number of excitations is always going to be even so we just shift a 1 over.
+------------------------------------------

@@ -6,14 +6,16 @@ testlib = ctypes.CDLL('/Users/shiv/Dropbox/slaterrules/slater_in_c/test/testlib.
 
 bitstring = ctypes.POINTER(ctypes.c_uint64)
 arrbitstring = ctypes.POINTER(bitstring)
-a_alpha = np.random.randint(low =4,high =10, size = (2),dtype=np.dtype('u8'))
-b_alpha = np.random.randint(low =4,high =10, size = (2),dtype=np.dtype('u8'))
-a_beta = np.random.randint(low =4,high =10, size = (2),dtype=np.dtype('u8'))
-b_beta = np.random.randint(low =4,high =10, size = (2),dtype=np.dtype('u8'))
-print a_alpha
+a_alpha = np.array([00011111,00011111],dtype=np.dtype('u8'))
+b_alpha = np.array([00011111,00011111],dtype=np.dtype('u8'))
+a_beta = np.array([00101111,00011111],dtype=np.dtype('u8'))
+b_beta = np.array([00011111,00011111],dtype=np.dtype('u8'))
+print "particle 1 alpha passed :", a_alpha
+print "particle 1 beta passed :", a_beta
+print "particle 2 alpha passed :", a_alpha
+print "particle 2 beta passed :", a_beta
 c = np.array([1],dtype=np.dtype('u8'))
 d = np.array([0],dtype=np.dtype('u8'))
-print 'shit', c,d
 testlib.n_excitations.restype = None
 testlib.n_excitations.argtypes = [
 np.ctypeslib.ndpointer(ctypes.c_uint64 , ndim=1, flags="C_CONTIGUOUS"),

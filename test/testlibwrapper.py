@@ -10,10 +10,10 @@ a_alpha = np.array([00011111,00011111],dtype=np.dtype('u8'))
 b_alpha = np.array([00011111,00011111],dtype=np.dtype('u8'))
 a_beta = np.array([00101111,00011111],dtype=np.dtype('u8'))
 b_beta = np.array([00011111,00011111],dtype=np.dtype('u8'))
-print "particle 1 alpha passed :", a_alpha
-print "particle 1 beta passed :", a_beta
-print "particle 2 alpha passed :", a_alpha
-print "particle 2 beta passed :", a_beta
+#print "particle 1 alpha passed :", a_alpha[0], a_alpha[1]
+#print "particle 1 beta passed :", a_beta[0], a_beta[1]
+#print "particle 2 alpha passed :", b_alpha[0], b_alpha[1]
+#print "particle 2 beta passed :",  b_beta[0], b_beta[1]
 c = np.array([1],dtype=np.dtype('u8'))
 d = np.array([0],dtype=np.dtype('u8'))
 testlib.n_excitations.restype = None

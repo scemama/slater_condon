@@ -1,14 +1,3 @@
-uint64_t n_excitations(**uint64_t det1, **uint64_t det2, uint64_t Nint){
-    uint64_t n_excit = __builtin_popcountll(det1[0][0]^det2[0][0]) + __builtin_popcountll(det1[0][1]^det2[0][1])
-    uint32_t l = 0;
-
-    for (uint64_t l = 1; l < Nint; l++) {
-        n_excit += __builtin_popcountll(det1[l][0]^det2[l][0]) + __builtin_popcountll(det1[l][1]^det2[l][1])
-    }
-    return nexcit>>1
-}
-
-
 subroutine get_single_excitation(det1,det2,exc,phase,Nint)
  integer, intent(in)  :: Nint
  integer*8, intent(in)  :: det1(Nint,2)

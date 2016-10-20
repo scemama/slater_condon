@@ -74,7 +74,7 @@ subroutine get_double_excitation(det1,det2,exc,phase,Nint)
       nperm = nperm + popcnt(iand(det1(j,ispin),  &
          iand( ibset(0_8,m-1)-1_8, ibclr(-1_8,n)+1_8 ) ))
     else
-      nperm = nperm + popcnt(iand(det1(k,ispin),  & 
+      nperm = nperm + popcnt(iand(det1(k,ispin),  &
                              ibset(0_8,m-1)-1_8)) &
                     + popcnt(iand(det1(j,ispin),  &
                              ibclr(-1_8,n) +1_8))

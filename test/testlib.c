@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <inttypes.h>
 #include <stdlib.h>
+#include <string>
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
 #define MIN(x, y) (((x) < (y)) ? (x) : (y))
 
@@ -22,25 +23,25 @@ void compute_density_matrix(uint64_t *dets, uint64_t *Ndets, double *coef, uint6
 void myprint(){
     printf("hello world\n");
 }
-
-uint64_t excindex(uint64_t *a_index, uint64_t *b_index, uint64_t *c_index){
-    return (*a_index*(uint64_t)2) + (*b_index*(uint64_t)2) + (c_index);
+// INDICES HELPERS
+uint64_t excindex(uint64_t &a_index, uint64_t &b_index, uint64_t &c_index){
+    return (a_index*(uint64_t)2) + (b_index * (uint64_t)2) + (c_index);
 }
 
-uint64_t detindex(uint64_t a_index, uint64_t b_index, uint64_t c_index, uint64_t *Ndets){
-    return (*Ndets * *a_index) + (*b_index * (uint64_t)2) + *c_index;
+uint64_t detindex(uint64_t &a_index, uint64_t &b_index, uint64_t &c_index, uint64_t &Ndets){
+    return (Ndets * a_index) + (b_index * (uint64_t)2) + c_index;
 }
 
 uint64_t densityindex(uint64_t a_index, uint64_t b_index, uint64_t *mo_num){
-    return (*mo_num * *a_index) + *b_index;
+    return (*mo_num * *a_index) + b_index;
 }
-
+// EXCITATION HELPER
 void get_excitation(uint64_t *det1, uint64_t *det2, uint64_t *exc, uintptr_t *degree, uint64_t *phase, uint64_t *Nint, uint64_t *dets, uint64_t *Ndets){
     n_excitations(det1, det2, Nint, degree, dets,Ndets);
     switch(*degree){
         case 2 :
             //call DOUBLE EXCITATION FUNCTION
-            get_single_excitation(det1, det2, exc, Nint, phase, dets, Ndets);
+            get_double_excitation(det1, det2, exc, Nint, phase, dets, Ndets);
             break;
         case 1 :
             //call SINGLE EXCITATION FUNCTION
@@ -278,6 +279,7 @@ void compute_density_matrix(uint64_t *dets, uint64_t *Ndets, double *coef, uint6
         }
     }
 }
+
 int main(void){
     uint64_t *Nint = 0, *dets = 0, Ndets = 10000;
     uint64_t mo_num = 105;

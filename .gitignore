@@ -6,3 +6,4 @@ test_cu_sse2
 test_h2o_avx
 test_h2o_sse2
 
+*.so

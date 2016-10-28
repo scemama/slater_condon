@@ -1,42 +1,67 @@
-!   Slater-Condon Rules
-!   Copyright (C) 2013 Anthony Scemama <scemama@irsamc.ups-tlse.fr>
-!                      Emmanuel Giner <emmanuel_giner_jr@hotmail.fr>
-!
-!   This program is free software; you can redistribute it and/or modify
-!   it under the terms of the GNU General Public License as published by
-!   the Free Software Foundation; either version 2 of the License, or
-!   (at your option) any later version.
-!
-!   This program is distributed in the hope that it will be useful,
-!   but WITHOUT ANY WARRANTY; without even the implied warranty of
-!   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-!   GNU General Public License for more details.
-!
-!   You should have received a copy of the GNU General Public License along
-!   with this program; if not, write to the Free Software Foundation, Inc.,
-!   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#include <stdint.h>
+#include <stdio.h>
+#define NINT 2
+#define NDET 10000
+#define MO_NUM 105
+#define LMAX 10000
 
-  program test
-    implicit none
-    integer,parameter  :: Nint=2, ndet=10000
-    integer*8  :: det(Nint,2,ndet)
-    integer    :: N_int
-    integer :: n_excitations
-    integer    :: i,k,l
-    double precision :: phase
-    integer    :: exc(0:2,2,2)
-    double precision :: t0, t1, irp_rdtsc
-    double precision :: t, t2, t3(-1:2), t4(-1:2)
-    double precision :: nb(-1:2)
-    double precision :: cpu0, cpu1
-    double precision :: events
-    double precision :: error
-    double precision :: coef(ndet)
-    integer, parameter :: mo_num = 105
-    double precision :: density_matrix(mo_num,mo_num)
-    integer,parameter  :: lmax = 10000
-    integer:: res
-    N_int = Nint
+void read_input(***det,*N_int,*coef,filename,filename2){
+    FILE *file;
+    file = fopen(filename, "r");
+    uint8_t i = 0;
+    uint8_t num_in;
+    while(fscanf(file, "%d", &num_in) > 0) {
+        if(i==0){
+            N_int = &num_in
+        } else{
+            det[]
+        }
+        integers[i] = num;
+        i++;
+    }
+    if (file) {
+        fscanf(myFile, "%d",N_int);
+
+        fclose(file);
+    }
+
+     open(unit=10,file=filename)
+     read(10,*) Nint
+     read(10,*) det
+     close(10)
+     open(unit=10,file=filename2)
+     read(10,*) coef
+     close(10)
+
+}
+
+double irp_rdtsc_(void) {
+  unsigned long long a, d;
+  __asm__ volatile ("rdtscp" : "=a" (a), "=d" (d));
+  return (double)((d<<32) + a);
+}
+
+
+int main(){
+    uint8_t det[NINT][2][NDET]
+    uint8_t n_excitations;
+    uint8_t i, j, k;
+    uint8_t N_int;
+    double phase;
+    double t0, t1, irp_rdtsc;
+    double cpu0, cpu1;
+    double events;
+    double error;
+    double coef[NDET];
+    double density_matrix; //density_matrix(mo_num,mo_num)
+    uint8_t res;
+    double nb[3];
+    double t,t2,t3[3],t4[3];
+    uint8_t exc[3][2][2];
+    uint8_t det[NINT][2][NDET];
+    read_input(&det,&N_int,&coef,'h2o_determinants.dat','cu.coef')
+
+}
     call read_input(det,N_int,coef,ndet,'h2o_determinants.dat','cu.coef')
 
     print *,  'ndet = ', ndet

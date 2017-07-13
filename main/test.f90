@@ -172,7 +172,7 @@
     call cpu_time(cpu1)
     print *,  'Cycles density matrix : ', (t1-t0)/(ndet*(ndet-1)/2)
     print *,  'CPU    density matrix : ', cpu1-cpu0
-!   print *, (density_matrix(k,k), k=1,mo_num)
+   !print *, (density_matrix(k,k), k=1,mo_num)
 
   end !----------
 

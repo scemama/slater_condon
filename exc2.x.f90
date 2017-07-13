@@ -67,17 +67,17 @@ subroutine get_double_excitation(det1,det2,exc,phase,Nint)
     low  = min(exc(i,1,ispin),exc(i,2,ispin))
     high = max(exc(i,1,ispin),exc(i,2,ispin))
     j = ishft(low-1,-6)+1
-    n = iand(low,63)
+    n = iand(low-1,63)
     k = ishft(high-1,-6)+1
-    m = iand(high,63)
+    m = iand(high-1,63)
     if (j==k) then
       nperm = nperm + popcnt(iand(det1(j,ispin),  &
-         iand( ibset(0_8,m-1)-1_8, ibclr(-1_8,n)+1_8 ) ))
+         iand( not(ishft(1_8,n+1))+1 ,ishft(1_8,m)-1)))
     else
       nperm = nperm + popcnt(iand(det1(k,ispin),  & 
-                             ibset(0_8,m-1)-1_8)) &
+                             ishft(1_8,m)-1)) &
                     + popcnt(iand(det1(j,ispin),  &
-                             ibclr(-1_8,n) +1_8))
+                             not(ishft(1_8,n+1))+1))
       do l=j+1,k-1
         nperm = nperm + popcnt(det1(l,ispin))
       end do

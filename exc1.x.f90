@@ -54,15 +54,15 @@ subroutine get_single_excitation(det1,det2,exc,phase,Nint)
        low  = min(exc(1,1,ispin),exc(1,2,ispin))
        high = max(exc(1,1,ispin),exc(1,2,ispin))
        j = ishft(low-1,-6)+1
-       n = iand(low,63)
+       n = iand(low-1,63)
        k = ishft(high-1,-6)+1
-       m = iand(high,63)
+       m = iand(high-1,63)
        if (j==k) then
          nperm = popcnt(iand(det1(j,ispin), &
-            iand( ibset(0_8,m-1)-1_8, ibclr(-1_8,n)+1_8 ) ))
+            iand( not(ishft(1_8,n+1))+1_8 ,ishft(1_8,m)-1_8)))
        else
-         nperm = popcnt(iand(det1(k,ispin), ibset(0_8,m-1)-1_8)) + &
-                 popcnt(iand(det1(j,ispin), ibclr(-1_8,n) +1_8))
+         nperm = popcnt(iand(det1(k,ispin), ishft(1_8,m)-1_8)) + &
+                 popcnt(iand(det1(j,ispin), not(ishft(1_8,n+1))+1_8))
          do i=j+1,k-1
            nperm = nperm + popcnt(det1(i,ispin))
          end do
